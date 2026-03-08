@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Harisyah Portfolio</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+:root{
+    --bg-soft: #f3f3f3;
+    --bg-white: #ffffff;
+    --text-main: #151515;
+    --text-muted: #4b4b4b;
+    --line-soft: #d7d7d7;
+    --line-strong: #222222;
+    --shadow-soft: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.14);
+}
+body{
+    font-family: Arial;
+    background: linear-gradient(180deg, #efefef 0%, #ffffff 38%);
+    color: var(--text-main);
+}
+header{
+    background: linear-gradient(145deg, #1f1f1f 0%, #0f0f0f 100%);
+    color: #f8f8f8;
+    padding:60px 0;
+    text-align:center;
+}
+header h1{
+    letter-spacing: 0.4px;
+}
+header p{
+    color: #d3d3d3;
+}
+section{
+    padding:40px 0;
+}
+.content-section{
+    background: var(--bg-white);
+    border: 1px solid var(--line-soft);
+    border-top: 4px solid var(--line-strong);
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 24px var(--shadow-soft);
+    opacity: 0;
+    animation: slideUp 0.65s ease forwards;
+}
+.content-section:nth-of-type(1){ animation-delay: 0.08s; }
+.content-section:nth-of-type(2){ animation-delay: 0.18s; }
+.content-section:nth-of-type(3){ animation-delay: 0.28s; }
+.content-section:nth-of-type(4){ animation-delay: 0.38s; }
+.content-section h2{
+    color: var(--text-main);
+    margin-bottom: 16px;
+}
+.content-section h2 i{
+    margin-right: 8px;
+    color: #2f2f2f;
+}
+.content-section p,
+.content-section li{
+    color: var(--text-muted);
+}
+.skills-list{
+    margin: 0;
+    padding-left: 20px;
+}
+.projects-section h2{
+    margin-bottom: 24px;
+}
+.project-card{
+    background: var(--bg-white);
+    border:1px solid var(--line-soft);
+    padding:20px;
+    border-radius:16px;
+    box-shadow: 0 8px 24px var(--shadow-soft);
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.project-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px var(--shadow-hover);
+}
+.project-card h4{
+    color: var(--text-main);
+    margin-bottom: 12px;
+}
+.project-card p{
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+.project-list{
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+.project-list li{
+    margin-bottom: 8px;
+}
+.tech-stack{
+    margin-top: 14px;
+}
+.tech-stack span{
+    display: inline-block;
+    background: var(--bg-soft);
+    color: #1f1f1f;
+    border: 1px solid #cccccc;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    margin: 4px 6px 0 0;
+}
+.contact-intro{
+    margin-bottom: 14px;
+}
+.contact-links{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+.contact-link-card{
+    display: block;
+    text-decoration: none;
+    background: #f7f7f7;
+    border: 1px solid #d0d0d0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    color: #232323;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.contact-link-card strong{
+    display: block;
+    color: #141414;
+    margin-bottom: 2px;
+}
+.contact-link-card i{
+    margin-right: 8px;
+}
+.contact-link-card:hover{
+    transform: translateY(-2px);
+    border-color: #b4b4b4;
+    box-shadow: 0 8px 18px var(--shadow-soft);
+}
+.profile-highlight{
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed #c8c8c8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.profile-photo{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #000000;
+    box-shadow: 0 8px 20px var(--shadow-soft);
+}
+.profile-note{
+    margin: 0;
+    color: var(--text-muted);
+}
+footer{
+    color: #5f5f5f;
+}
+@keyframes slideUp{
+    from{
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+<h1>Nurul Harisyah Adzami</h1>
+<p>Web & System Developer</p>
+</header>
+<br>
+<!-- ABOUT -->
+<section class="container content-section">
+<h2><i class="bi bi-person-badge"></i>About Me</h2>
+<p>
+I am an Information Technology undergraduate from Universiti Utara Malaysia (UUM).
+I enjoy building systems and web applications, especially with
+PHP, JavaScript, MySQL, and Bootstrap.
+During my internship and FYP, I got to build real systems and sharpen my practical development skills.
+</p>
+</section>
+
+<!-- SKILLS -->
+<section class="container content-section">
+<h2><i class="bi bi-tools"></i>Skills</h2>
+
+<ul class="skills-list">
+<li>PHP</li>
+<li>Java</li>
+<li>JavaScript</li>
+<li>HTML & CSS</li>
+<li>Bootstrap</li>
+<li>MySQL</li>
+</ul>
+
+</section>
+
+<!-- PROJECT -->
+<section class="container content-section projects-section">
+<h2><i class="bi bi-kanban"></i>Projects</h2>
+
+<div class="row g-4">
+
+<div class="col-lg-4 col-md-6">
+<div class="project-card">
+<h4>e-Orientasi Staff Hospital Baling system</h4>
+<ul class="project-list">
+<li>Built a multi-role orientation platform for Staff, Penyelia (Supervisor), and Admin with role-based authentication and session handling.</li>
+<li>Implemented orientation tracking across 11 units, including slide-level progress, completion status, and certificate generation for staff.</li>
+<li>Developed supervisor verification workflow to validate staff orientation completion by department/unit.</li>
+<li>Created admin modules for user management (staff/supervisor), progress monitoring, reset/complete actions, and CSV export reporting.</li>
+<li>Built content management for orientation slides (upload, replace, delete, auto-renumber) to simplify operational updates without code changes.</li>
+</ul>
+<div class="tech-stack">
+<span>Laravel</span><span>PHP</span><span>MySQL</span><span>Bootstrap</span>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="project-card">
+<h4>Journal Digital Technology Expert Review (JDTER) Management System</h4>
+<ul class="project-list">
+<li>Developed a Journal Digital Technology Expert Review (JDTER) Management System - secure access module enabling reviewers to view and manage their assigned manuscripts.</li>
+<li>Integrated direct manuscript download functionality for efficient file access.</li>
+<li>Implemented a structured evaluation submission system to streamline reviewer assessment workflows.</li>
+</ul>
+<div class="tech-stack">
+<span>PHP</span><span>JavaScript</span><span>MySQL</span>
+</div>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-6">
+<div class="project-card">
+<h4>FitConsult - Web-Based Fitness Consultation Management System</h4>
+<ul class="project-list">
+<li>Enabled authentication and management of consultee information.</li>
+<li>Integrated BMI calculation and activity recommendation features to support personalized fitness planning.</li>
+<li>Developed an automated pricing calculation module based on consultation session duration to streamline cost estimation.</li>
+</ul>
+<div class="tech-stack">
+<span>PHP</span><span>MySQL</span>
+</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="container content-section">
+<h2>Contact Me</h2>
+
+<p class="contact-intro">I would love to connect and chat about web development, systems, or collaboration opportunities.</p>
+
+<div class="contact-links">
+<a class="contact-link-card" href="mailto:harisyahadzami@gmail.com">
+<strong><i class="bi bi-envelope"></i>Email</strong>
+harisyahadzami@gmail.com
+</a>
+<a class="contact-link-card" href="https://github.com/hrsyhzmi" target="_blank" rel="noopener noreferrer">
+<strong><i class="bi bi-github"></i>GitHub</strong>
+github.com/hrsyhzmi
+</a>
+</div>
+
+<div class="profile-highlight">
+<img src="profil.jpeg" alt="Profile photo of Nurul Harisyah Adzami" class="profile-photo">
+<p class="profile-note">Here is my profile photo. Feel free to reach out, I am always open to learning and new opportunities.</p>
+</div>
+
+</section>
+
+<footer class="text-center p-3">
+<p>© 2026 Harisyah Portfolio</p>
+</footer>
+
+</body>
+</html>
