@@ -247,6 +247,37 @@ section{
     color: var(--text-main);
     margin-bottom: 12px;
 }
+.project-preview-label{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #3a3a3a;
+    background: #f0f0f0;
+    border: 1px solid #d7d7d7;
+    border-radius: 999px;
+    padding: 5px 10px;
+    margin: 2px 0 10px;
+}
+.project-image{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 1px solid #d4d4d4;
+    margin: 2px 0 12px;
+    object-fit: cover;
+    object-position: top center;
+    cursor: zoom-in;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+.project-image:hover{
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 20px var(--shadow-soft);
+    filter: saturate(1.04);
+}
 .project-card p{
     color: var(--text-muted);
     line-height: 1.7;
@@ -382,6 +413,55 @@ section{
     margin: 0;
     color: var(--text-muted);
 }
+.image-viewer{
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.78);
+}
+.image-viewer.open{
+    display: flex;
+}
+.image-viewer-content{
+    position: relative;
+    width: min(960px, 94vw);
+    max-height: 92vh;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: 0 22px 38px rgba(0, 0, 0, 0.32);
+}
+.image-viewer-content img{
+    width: 100%;
+    max-height: 76vh;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid #d8d8d8;
+    background: #f5f5f5;
+}
+.image-viewer-caption{
+    margin: 10px 4px 0;
+    color: #353535;
+    font-size: 0.95rem;
+}
+.image-viewer-close{
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: #1b1b1b;
+    color: #ffffff;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+}
 footer{
     color: #5f5f5f;
 }
@@ -503,6 +583,8 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 <div class="col-lg-4 col-md-6">
 <div class="project-card">
 <h4>e-Orientasi Staff Hospital Baling system | Oct 2025 – Apr 2026</h4>
+<span class="project-preview-label"><i class="bi bi-image"></i>System Preview</span>
+<img src="orientasi.png" alt="e-Orientasi Staff Hospital Baling system preview" class="project-image">
 <ul class="project-list">
 <li>Built a multi-role orientation platform for Staff, Penyelia (Supervisor), and Admin with role-based authentication and session handling.</li>
 <li>Implemented orientation tracking across 11 units, including slide-level progress, completion status, and certificate generation for staff.</li>
@@ -519,6 +601,8 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 <div class="col-lg-4 col-md-6">
 <div class="project-card">
 <h4>Journal Digital Technology Expert Review (JDTER) Management System | Oct 2024 – Sep 2025</h4>
+<span class="project-preview-label"><i class="bi bi-image"></i>System Preview</span>
+<img src="jdter.png" alt="JDTER Management System preview" class="project-image">
 <ul class="project-list">
 <li>Developed a Journal Digital Technology Expert Review (JDTER) Management System - secure access module enabling reviewers to view and manage their assigned manuscripts.</li>
 <li>Integrated direct manuscript download functionality for efficient file access.</li>
@@ -533,6 +617,8 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 <div class="col-lg-4 col-md-6">
 <div class="project-card">
 <h4>FitConsult - Web-Based Fitness Consultation Management System</h4>
+<span class="project-preview-label"><i class="bi bi-image"></i>System Preview</span>
+<img src="fitconsult.png" alt="FitConsult Management System preview" class="project-image">
 <ul class="project-list">
 <li>Enabled authentication and management of consultee information.</li>
 <li>Integrated BMI calculation and activity recommendation features to support personalized fitness planning.</li>
@@ -610,6 +696,14 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 <p>© 2026 Harisyah Portfolio</p>
 </footer>
 
+<div class="image-viewer" id="imageViewer" aria-hidden="true">
+<div class="image-viewer-content">
+<button type="button" class="image-viewer-close" id="imageViewerClose" aria-label="Close image preview">&times;</button>
+<img id="imageViewerImg" src="" alt="Project preview">
+<p class="image-viewer-caption" id="imageViewerCaption"></p>
+</div>
+</div>
+
 <script>
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -623,6 +717,39 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.content-section, .project-card, .skills-list li, .contact-link-card').forEach((el, index) => {
     el.style.transitionDelay = `${Math.min(index * 0.04, 0.36)}s`;
     observer.observe(el);
+});
+
+const imageViewer = document.getElementById('imageViewer');
+const imageViewerImg = document.getElementById('imageViewerImg');
+const imageViewerCaption = document.getElementById('imageViewerCaption');
+const imageViewerClose = document.getElementById('imageViewerClose');
+
+document.querySelectorAll('.project-image').forEach((img) => {
+    img.addEventListener('click', () => {
+        imageViewerImg.src = img.src;
+        imageViewerImg.alt = img.alt;
+        imageViewerCaption.textContent = img.alt;
+        imageViewer.classList.add('open');
+        imageViewer.setAttribute('aria-hidden', 'false');
+    });
+});
+
+const closeImageViewer = () => {
+    imageViewer.classList.remove('open');
+    imageViewer.setAttribute('aria-hidden', 'true');
+};
+
+imageViewerClose.addEventListener('click', closeImageViewer);
+imageViewer.addEventListener('click', (event) => {
+    if (event.target === imageViewer) {
+        closeImageViewer();
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && imageViewer.classList.contains('open')) {
+        closeImageViewer();
+    }
 });
 </script>
 
