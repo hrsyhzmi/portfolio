@@ -134,30 +134,52 @@ section{
     background: #ececec;
     transition: transform 0.25s ease;
 }
-.skills-list li:hover i{
+.skills-list li .skill-logo-wrap{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ececec;
+    transition: transform 0.25s ease;
+}
+.skills-list li .skill-logo{
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+.skills-list li:hover i,
+.skills-list li:hover .skill-logo-wrap{
     transform: scale(1.18) rotate(-8deg);
 }
-.skills-list li:nth-child(1) i{
+.skills-list li:nth-child(1) .skill-logo-wrap{
+    background: rgba(255, 45, 32, 0.14);
+}
+.skills-list li:nth-child(2) .skill-logo-wrap{
+    background: rgba(162, 89, 255, 0.16);
+}
+.skills-list li:nth-child(3) i{
     color: #777bb3;
     background: rgba(119, 123, 179, 0.14);
 }
-.skills-list li:nth-child(2) i{
+.skills-list li:nth-child(4) i{
     color: #f89820;
     background: rgba(248, 152, 32, 0.16);
 }
-.skills-list li:nth-child(3) i{
+.skills-list li:nth-child(5) i{
     color: #f7df1e;
     background: rgba(247, 223, 30, 0.22);
 }
-.skills-list li:nth-child(4) i{
+.skills-list li:nth-child(6) i{
     color: #e34f26;
     background: rgba(227, 79, 38, 0.14);
 }
-.skills-list li:nth-child(5) i{
+.skills-list li:nth-child(7) i{
     color: #7952b3;
     background: rgba(121, 82, 179, 0.14);
 }
-.skills-list li:nth-child(6) i{
+.skills-list li:nth-child(8) i{
     color: #00758f;
     background: rgba(0, 117, 143, 0.14);
 }
@@ -499,4 +521,3 @@ document.querySelectorAll('.content-section, .project-card, .skills-list li, .co
 
 </body>
 </html>
-
