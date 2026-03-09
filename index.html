@@ -6,6 +6,9 @@
 
 <title>Harisyah Portfolio</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -21,21 +24,76 @@
     --shadow-hover: rgba(0, 0, 0, 0.14);
 }
 body{
-    font-family: Arial;
+    font-family: 'Manrope', sans-serif;
     background: linear-gradient(180deg, #efefef 0%, #ffffff 38%);
     color: var(--text-main);
+    position: relative;
+    overflow-x: hidden;
+}
+body::before,
+body::after{
+    content: "";
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(55px);
+    z-index: -1;
+    opacity: 0.32;
+    pointer-events: none;
+}
+body::before{
+    top: -85px;
+    left: -60px;
+    background: #b2c7ff;
+    animation: floatBlobOne 11s ease-in-out infinite;
+}
+body::after{
+    right: -90px;
+    bottom: 5vh;
+    background: #d9f3d4;
+    animation: floatBlobTwo 13s ease-in-out infinite;
 }
 header{
     background: linear-gradient(145deg, #1f1f1f 0%, #0f0f0f 100%);
     color: #f8f8f8;
     padding:60px 0;
     text-align:center;
+    position: relative;
+    overflow: hidden;
+}
+header::before,
+header::after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.22;
+}
+header::before{
+    width: 210px;
+    height: 210px;
+    background: radial-gradient(circle, #fafafa 0%, transparent 68%);
+    top: -50px;
+    left: 8%;
+    animation: drift 10s ease-in-out infinite;
+}
+header::after{
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, #bdbdbd 0%, transparent 70%);
+    bottom: -70px;
+    right: 7%;
+    animation: drift 12s ease-in-out infinite reverse;
 }
 header h1{
     letter-spacing: 0.4px;
+    animation: heroUp 0.7s ease forwards;
 }
 header p{
     color: #d3d3d3;
+    opacity: 0;
+    animation: heroUp 0.7s ease 0.16s forwards;
 }
 section{
     padding:40px 0;
@@ -49,12 +107,9 @@ section{
     margin-bottom: 24px;
     box-shadow: 0 10px 24px var(--shadow-soft);
     opacity: 0;
-    animation: slideUp 0.65s ease forwards;
+    transform: translateY(26px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.content-section:nth-of-type(1){ animation-delay: 0.08s; }
-.content-section:nth-of-type(2){ animation-delay: 0.18s; }
-.content-section:nth-of-type(3){ animation-delay: 0.28s; }
-.content-section:nth-of-type(4){ animation-delay: 0.38s; }
 .content-section h2{
     color: var(--text-main);
     margin-bottom: 16px;
@@ -68,8 +123,29 @@ section{
     color: var(--text-muted);
 }
 .skills-list{
+    list-style: none;
     margin: 0;
-    padding-left: 20px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+.skills-list li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f6f6f6;
+    border: 1px solid #d0d0d0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.skills-list li i{
+    font-size: 1.05rem;
+    color: #1c1c1c;
 }
 .projects-section h2{
     margin-bottom: 24px;
@@ -81,10 +157,16 @@ section{
     border-radius:16px;
     box-shadow: 0 8px 24px var(--shadow-soft);
     height: 100%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    opacity: 0;
+    --rx: 0deg;
+    --ry: 0deg;
+    --ty: 0px;
+    transform: perspective(950px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--ty));
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.65s ease;
 }
 .project-card:hover{
-    transform: translateY(-4px);
+    --ty: -4px;
     box-shadow: 0 12px 28px var(--shadow-hover);
 }
 .project-card h4{
@@ -133,7 +215,9 @@ section{
     border-radius: 12px;
     padding: 12px 14px;
     color: #232323;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .contact-link-card strong{
     display: block;
@@ -175,6 +259,15 @@ section{
 footer{
     color: #5f5f5f;
 }
+.reveal-in{
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-in.project-card,
+.reveal-in.contact-link-card,
+.reveal-in.skills-list li{
+    transition-delay: var(--reveal-delay, 0ms);
+}
 @keyframes slideUp{
     from{
         opacity: 0;
@@ -183,6 +276,46 @@ footer{
     to{
         opacity: 1;
         transform: translateY(0);
+    }
+}
+@keyframes heroUp{
+    from{
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes drift{
+    0%, 100%{
+        transform: translateY(0) translateX(0);
+    }
+    50%{
+        transform: translateY(16px) translateX(8px);
+    }
+}
+@keyframes floatBlobOne{
+    0%, 100%{
+        transform: translate(0, 0) scale(1);
+    }
+    50%{
+        transform: translate(24px, 18px) scale(1.07);
+    }
+}
+@keyframes floatBlobTwo{
+    0%, 100%{
+        transform: translate(0, 0) scale(1);
+    }
+    50%{
+        transform: translate(-26px, -20px) scale(1.06);
+    }
+}
+@media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+        animation: none !important;
+        transition: none !important;
     }
 }
 </style>
@@ -213,12 +346,12 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 <h2><i class="bi bi-tools"></i>Skills</h2>
 
 <ul class="skills-list">
-<li>PHP</li>
-<li>Java</li>
-<li>JavaScript</li>
-<li>HTML & CSS</li>
-<li>Bootstrap</li>
-<li>MySQL</li>
+<li><i class="bi bi-filetype-php"></i>PHP</li>
+<li><i class="bi bi-cup-hot-fill"></i>Java</li>
+<li><i class="bi bi-filetype-js"></i>JavaScript</li>
+<li><i class="bi bi-filetype-html"></i>HTML &amp; CSS</li>
+<li><i class="bi bi-bootstrap-fill"></i>Bootstrap</li>
+<li><i class="bi bi-database-fill"></i>MySQL</li>
 </ul>
 
 </section>
@@ -277,7 +410,6 @@ During my internship and FYP, I got to build real systems and sharpen my practic
 
 </section>
 
-<!-- CONTACT -->
 <section class="container content-section">
 <h2>Contact Me</h2>
 
@@ -305,6 +437,47 @@ github.com/hrsyhzmi
 <p>© 2026 Harisyah Portfolio</p>
 </footer>
 
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var targets = document.querySelectorAll('.content-section, .project-card, .contact-link-card, .skills-list li');
 
+    targets.forEach(function (element, index) {
+        element.style.setProperty('--reveal-delay', Math.min(index * 55, 420) + 'ms');
+    });
+
+    var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal-in');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+    targets.forEach(function (element) {
+        observer.observe(element);
+    });
+
+    var cards = document.querySelectorAll('.project-card');
+    cards.forEach(function (card) {
+        card.addEventListener('mousemove', function (event) {
+            var rect = card.getBoundingClientRect();
+            var x = (event.clientX - rect.left) / rect.width;
+            var y = (event.clientY - rect.top) / rect.height;
+            var rotateY = ((x - 0.5) * 8).toFixed(2);
+            var rotateX = ((0.5 - y) * 8).toFixed(2);
+
+            card.style.setProperty('--rx', rotateX + 'deg');
+            card.style.setProperty('--ry', rotateY + 'deg');
+        });
+
+        card.addEventListener('mouseleave', function () {
+            card.style.setProperty('--rx', '0deg');
+            card.style.setProperty('--ry', '0deg');
+        });
+    });
+});
+</script>
+
+</body>
 </html>
