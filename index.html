@@ -13,11 +13,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 
 <style>
 :root{
     --nav-h: 80px;
-    --footer-h: 52px;
+    --footer-h: var(--nav-h);
     --bg-soft: #f3f3f3;
     --bg-white: #ffffff;
     --bg-cream: #f6f3ec;
@@ -129,6 +130,8 @@ header{
     margin-bottom: 0;
 }
 header h1{
+    font-family: 'Kaushan Script', cursive;
+    font-size: clamp(2.4rem, 4vw, 4.9rem);
     letter-spacing: 0.4px;
     animation: heroRise 0.9s ease-out forwards;
 }
@@ -329,9 +332,9 @@ section[id]{
     border-radius: 10px;
 }
 #about h2{
-    font-family: 'Bungee', cursive;
-    color: #a0b5dc;
-    font-size: 48px;
+    font-family: 'Kaushan Script', cursive;
+    color: #7b95c5;
+    font-size: 62px;
     letter-spacing: 0.5px;
     line-height: 1.1;
     margin-bottom: 22px;
@@ -1085,8 +1088,8 @@ footer{
 
 </section>
 
-<footer class="text-center p-3">
-<p>© 2026 Harisyah Portfolio</p>
+<footer class="text-center">
+<p>© 2026 Harisyah</p>
 </footer>
 
 <div class="image-viewer" id="imageViewer" aria-hidden="true">
